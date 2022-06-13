@@ -61,7 +61,7 @@ def extract_video_link(links: dict):
     if REPOST_VIDEO_AS_LINK and "external" in links:
         return links["external"]
 
-    print(links)
+    logger.debug(links)
     for quality in [720, 480, 360, 240]:
         quality_key = f"mp4_{quality}"
         if quality_key in links:
