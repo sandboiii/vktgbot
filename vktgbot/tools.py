@@ -1,5 +1,6 @@
 import os
 
+from config import REPOST_VIDEO_AS_LINK
 from loguru import logger
 
 
@@ -74,7 +75,10 @@ def add_urls_to_text(text: str, urls: list, videos: list) -> str:
     for url in urls:
         if url not in text:
             if first_link:
-                text = f'<a href="{url}"> </a>{text}\n\n{url}' if text else url
+                if REPOST_VIDEO_AS_LINK:
+                    text = f'<a href="{url}"> </a>{text}\n\n{url}' if text else url
+                else:
+                    text = f'{text}<a href="{url}">&#8204;</a>' if text else url
                 first_link = False
             else:
                 text += f"\n{url}"

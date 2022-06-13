@@ -20,6 +20,7 @@ TIME_TO_SLEEP: int = int(os.getenv("VAR_TIME_TO_SLEEP", 120))
 SKIP_ADS_POSTS: bool = os.getenv("VAR_SKIP_ADS_POSTS", "").lower() in ("true",)
 SKIP_COPYRIGHTED_POST: bool = os.getenv("VAR_SKIP_COPYRIGHTED_POST", "").lower() in ("true")
 SKIP_REPOSTS: bool = os.getenv("VAR_SKIP_REPOSTS", "").lower() in ("true")
+REPOST_VIDEO_AS_LINK: bool = os.getenv("VAR_REPOST_VIDEO_AS_LINK", "").lower() in ("true")
 
 WHITELIST: list = json.loads(os.getenv("VAR_WHITELIST", "[]"))
 BLACKLIST: list = json.loads(os.getenv("VAR_BLACKLIST", "[]"))

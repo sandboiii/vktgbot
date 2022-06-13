@@ -1,5 +1,6 @@
 from typing import Union
 
+from config import REPOST_VIDEO_AS_LINK
 import requests
 from loguru import logger
 
@@ -46,12 +47,27 @@ def get_video_url(
     )
     data = response.json()
     if "response" in data:
-        return data["response"]["items"][0]["files"].get("external", "")
+        return extract_video_link(data["response"]["items"][0]["files"])
+
     elif "error" in data:
         logger.error(
             "Error was detected when requesting data from VK: "
             f"{data['error']['error_msg']}"
         )
+    return ""
+
+
+def extract_video_link(links: dict):
+    if REPOST_VIDEO_AS_LINK and "external" in links:
+        return links["external"]
+
+    print(links)
+    for quality in [720, 480, 360, 240]:
+        quality_key = f"mp4_{quality}"
+        if quality_key in links:
+            print(quality_key, links[quality_key])
+            return links[quality_key]
+
     return ""
 
 
