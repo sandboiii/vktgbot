@@ -65,7 +65,7 @@ def extract_video_link(links: dict):
     for quality in [720, 480, 360, 240]:
         quality_key = f"mp4_{quality}"
         if quality_key in links:
-            print(quality_key, links[quality_key])
+            logger.debug(quality_key, links[quality_key])
             return links[quality_key]
 
     return ""
